@@ -1,0 +1,22 @@
+﻿<local:BaseControl 
+            x:TypeArguments="core:IconTextBoxViewModel"
+            x:Class="RecipeRecommender.IconTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RecipeRecommender"
+             xmlns:core ="clr-namespace:Core;assembly=Core"
+             mc:Ignorable="d" 
+             d:DataContext="{x:Static local:IconTextBoxDesignModel.Instance}">
+    <StackPanel Orientation="Horizontal"
+                Margin="10">
+        <TextBox Tag="{Binding IconType,  Converter={local:IconTypeToIconConverter}}"
+                 Style="{StaticResource IconText}"/>
+
+        <TextBox  Tag="{Binding TextBoxText}"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Width="160"/>
+    </StackPanel>
+</local:BaseControl>

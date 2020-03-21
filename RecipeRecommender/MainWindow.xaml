@@ -1,0 +1,132 @@
+﻿<Window x:Class="RecipeRecommender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecipeRecommender"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
+        Title="Recipe Recommender Application"
+        Height="450" 
+        Width="800" 
+        x:Name="TEST">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type local:MainWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+
+                        <!--    Outer border for dropdown shadow    -->
+                        <Border Margin= "20">
+                            <Grid >
+                                <!--    Border for dropshadow-->
+                                <Border Background="{StaticResource BackgroundGreenBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        BorderThickness="2">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="2" Opacity="0.6"/>
+                                    </Border.Effect>
+                                </Border>
+
+                                <!--    Border for inner content    -->
+                                <Border Background="{StaticResource BackgroundLightBrush}"
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        Margin="{Binding ResizeBorderThickness, FallbackValue=3}">
+
+                                    <!--    Title and content     -->
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <!--    Title    -->
+                                            <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=20}"/>
+
+                                            <!--    Content    -->
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!--    Title Bar    -->
+                                        <Grid Background="{StaticResource BackgroundGreenBrush}" Margin="-1 -1 -1 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--    Title      -->
+                                            <TextBlock Text="~  Recipe  Recommender  ~"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center"
+                                                       Grid.ColumnSpan="2" 
+                                                       FontFamily="Blackadder ITC"
+                                                       FontSize="{StaticResource FontSizeLarge}"
+                                                       Foreground="{StaticResource WordLightGreenBrush}"/>
+
+                                            <!--    Control Buttons     -->
+                                            <Border Grid.Column="1" 
+                                                    Padding="5"
+                                                    ClipToBounds="True">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel.Resources>
+                                                        <Style TargetType="{x:Type Button}">
+                                                        </Style>
+                                                    </StackPanel.Resources>
+                                                    <Button  Content="{StaticResource FontAwesomeWindowMinimize}"
+                                                             Style="{StaticResource WindowControlButton}"
+                                                             Height="{Binding TitleHeightGridLength}"
+                                                             Command="{Binding MinimizeCommand}"/>
+                                                    <Button  Content="{StaticResource FontAwesomeWindowRestore}"
+                                                             Style="{StaticResource WindowControlButton}"
+                                                             Height="{Binding TitleHeightGridLength}"
+                                                             Command="{Binding MaximizeCommand}"/>
+                                                    <Button  Content="{StaticResource FontAwesomeWindowClose}"
+                                                             Style="{StaticResource WindowCloseButton}"
+                                                             Height="{Binding TitleHeightGridLength}"
+                                                             Command="{Binding CloseCommand}"/>
+                                                </StackPanel>
+                                            </Border>
+
+                                        </Grid>
+
+                                        <!--    Content    -->
+                                        <Border Grid.Row="1" ClipToBounds="True">
+                                            <ContentPresenter Content="{TemplateBinding Content}"/>
+                                        </Border>
+
+                                    </Grid>
+
+                                </Border>
+                            </Grid>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="{Binding ResizeBorderThickness}"
+            CaptionHeight="{Binding TitleHeight}"
+            GlassFrameThickness="0"
+            CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+
+    <!--    Whole content   -->
+    <Border x:Name="border" CornerRadius="10">
+
+        <Grid >
+            <!--    Background image    -->
+            <StackPanel ClipToBounds="True">
+                <Image Source="./Images/Background/recipe_background4.png" OpacityMask="{Binding ElementName=border, Mode=OneWay}" />
+            </StackPanel>
+
+            <local:LoginPage VerticalAlignment="Center" HorizontalAlignment="Center"  Background="Transparent" />
+
+        </Grid>
+
+    </Border>
+</Window>
